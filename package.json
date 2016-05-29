@@ -1,0 +1,22 @@
+{
+  "name": "try-node-stuff",
+  "version": "0.0.1",
+  "description": "Try various Node.js things.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nick-ng/TryNodeStuff.git"
+  },
+  "author": "nick-ng",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/nick-ng/TryNodeStuff/issues"
+  },
+  "homepage": "https://github.com/nick-ng/TryNodeStuff#readme",
+  "dependencies": {
+    "express": "4.13.4"
+  }
+}
