@@ -12,6 +12,10 @@ app.set( 'port', ( process.env.PORT || 3434 ) );
 //console.log(process.env);
 fs.writeFile( 'hello.txt', 'hello' );
 
+app.get( '/jquerytextspeed', function( req, res) {
+  res.sendFile(PAGEDIR + '/jquerytextspeed.html' );
+});
+
 app.get( '/', function( req, res ) {
   //console.log(req);
   fs.writeFile( 'request.json', JSON.stringify(util.inspect(req)));

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <title>Test JavaScript's Performance</title>
+  </head>
+  <body>
+    <hr>
+    <div id="val-speed">
+      <h1>jQuery.val() Speed</h1>
+      <label for="val-speed-input">Change Number</label>
+      <input id="val-speed-input" type="number" val="0">
+      <p>
+        <button id="val-speed-text-test" type="button">Text Test</button>
+        <button id="val-speed-global-test" type="button">Global Test</button>
+      </p>
+      <p>Number: <span id="val-speed-display">0</span> <span id="val-speed-direction"></span></p>
+      <p id="val-speed-time"></p>
+    </div>
+    <hr>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+      var valSpeedGlobal = 0;
+      $(function() {
+        var valSpeedInput = $( '#val-speed-input' );
+        valSpeedInput.bind( 'change keyup', function() {
+          var newVal = parseInt(valSpeedInput.val());
+          //changeVal(newVal);
+          changeGlobal(newVal);
+        });
+        
+        $( '#val-speed-text-test' ).click(function() {
+          var i = parseInt(valSpeedInput.val());
+          var start = new Date();
+          while (i--) {
+            changeVal(i);
+          }
+          var end = new Date();
+          var seconds = (end.getTime() - start.getTime()) / 1000;
+          $( '#val-speed-time' ).text( 'Changing ' + valSpeedInput.val() + ' times using parseInt( $().text() ) took ' + seconds + 's' );
+        });
+        
+        $( '#val-speed-global-test' ).click(function() {
+          var i = parseInt(valSpeedInput.val());
+          var start = new Date();
+          while (i--) {
+            changeGlobal(i);
+          }
+          var end = new Date();
+          var seconds = (end.getTime() - start.getTime()) / 1000;
+          $( '#val-speed-time' ).text( 'Changing ' + valSpeedInput.val() + ' times using a global variable took ' + seconds + 's' );
+        });
+        
+        function changeVal(newVal) {
+          var valSpeedDisplay = $( '#val-speed-display' );
+          var oldVal = parseInt(valSpeedDisplay.text());
+          valSpeedDisplay.text(newVal);
+          if (newVal > oldVal) {
+            $( '#val-speed-direction' ).text( '(up)' );
+          } else if (newVal < oldVal) {
+            $( '#val-speed-direction' ).text( '(down)' );
+          }
+        }
+        
+        function changeGlobal(newVal) {
+          var valSpeedDisplay = $( '#val-speed-display' );
+          valSpeedDisplay.text(newVal);
+          if (newVal > valSpeedGlobal) {
+            $( '#val-speed-direction' ).text( '(up)' );
+          } else if (newVal < valSpeedGlobal) {
+            $( '#val-speed-direction' ).text( '(down)' );
+          }
+          valSpeedGlobal = newVal;
+        }
+      });
+    </script>
+  </body>
+</html>
